@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Um convite especial... ✨</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ffd1dc, #ffccd5);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 24px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .etapa {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .etapa.ativa {
+      display: block;
+      opacity: 1;
+    }
+
+    .icone-topo {
+      font-size: 3.2rem;
+      margin-bottom: 12px;
+    }
+
+    h1, h2 {
+      font-size: 1.8rem;
+      color: #d81b60;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: #666;
+      font-size: 1.05rem;
+      margin-bottom: 25px;
+      line-height: 1.4;
+    }
+
+    /* BOTÕES DA PRIMEIRA TELA */
+    .botoes-iniciais {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      min-height: 80px;
+    }
+
+    .btn-inicial {
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.2s ease;
+    }
+
+    #btn-sim {
+      background-color: #e91e63;
+      color: white;
+      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+    }
+
+    #btn-sim:hover {
+      background-color: #c2185b;
+    }
+
+    #btn-nao {
+      background-color: #f0f0f0;
+      color: #777;
+      z-index: 9999;
+    }
+
+    /* BOTÕES DE ESCOLHA */
+    .grid-opcoes {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .grid-dupla {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .grid-tripla {
+      grid-template-columns: 1fr;
+    }
+
+    .btn-opcao {
+      padding: 14px 20px;
+      font-size: 1.05rem;
+      font-weight: bold;
+      border: 2px solid #ffccd5;
+      border-radius: 16px;
+      cursor: pointer;
+      background-color: #fff0f3;
+      color: #d81b60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-opcao:hover {
+      background-color: #ffb3c1;
+      transform: translateY(-2px);
+    }
+
+    .btn-zap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 26px;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.05rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+      transition: transform 0.2s ease;
+      margin-top: 10px;
+    }
+
+    .btn-zap:hover {
+      background-color: #20ba5a;
+      transform: scale(1.04);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+
+    <!-- FASE 1: O Aceita inicial -->
+    <div id="fase-1" class="etapa ativa">
+      <div class="icone-topo">✨</div>
+      <h1 id="titulo-convite">Aceita sair comigo?</h1>
+      <p id="subtitulo-convite">Prometo boa companhia, risadas e comida boa!</p>
+
+      <div class="botoes-iniciais">
+        <button id="btn-sim" class="btn-inicial">Sim!</button>
+        <button id="btn-nao" class="btn-inicial">Não</button>
+      </div>
+    </div>
+
+    <!-- FASE 2: Sábado ou Domingo -->
+    <div id="fase-2" class="etapa">
+      <div class="icone-topo">📅</div>
+      <h2>Sabia que você ia topar!</h2>
+      <p>Qual dia fica melhor pra você?</p>
+
+      <div class="grid-opcoes grid-dupla">
+        <button class="btn-opcao" onclick="escolherDia('Sábado')">
+          <span>🗓️</span> Sábado
+        </button>
+        <button class="btn-opcao" onclick="escolherDia('Domingo')">
+          <span>☀️</span> Domingo
+        </button>
+      </div>
+    </div>
+
+    <!-- FASE 3: Tarde ou Noite -->
+    <div id="fase-3" class="etapa">
+      <div class="icone-topo">⏰</div>
+      <h2>Em qual horário?</h2>
+      <p>Prefere de tarde ou de noite?</p>
+
+      <div class="grid-opcoes grid-dupla">
+        <button class="btn-opcao" onclick="escolherTurno('Tarde')">
+          <span>🌇</span> De tarde
+        </button>
+        <button class="btn-opcao" onclick="escolherTurno('Noite')">
+          <span>🌙</span> De noite
+        </button>
+      </div>
+    </div>
+
+    <!-- FASE 4A: Se for Tarde -->
+    <div id="fase-tarde" class="etapa">
+      <div class="icone-topo">🍧</div>
+      <h2>Onde a gente vai?</h2>
+      <p>Escolhe o que primeiro vier à mente:</p>
+
+      <div class="grid-opcoes grid-tripla">
+        <button class="btn-opcao" onclick="finalizarEscolha('uma Sorveteria')">
+          <span>🍦</span> Sorveteria
+        </button>
+        <button class="btn-opcao" onclick="finalizarEscolha('uma Cafeteria')">
+          <span>☕</span> Cafeteria
+        </button>
+        <button class="btn-opcao" onclick="finalizarEscolha('tomar um açaí na pracinha')">
+          <span>🌳</span> Açaí na pracinha
+        </button>
+      </div>
+    </div>
+
+    <!-- FASE 4B: Se for Noite -->
+    <div id="fase-noite" class="etapa">
+      <div class="icone-topo">🍔🌃</div>
+      <h2>O que a gente vai comer?</h2>
+      <p>Escolhe o seu lanche favorito:</p>
+
+      <div class="grid-opcoes grid-tripla">
+        <button class="btn-opcao" onclick="finalizarEscolha('uma Hamburgueria')">
+          <span>🍔</span> Hamburgueria
+        </button>
+        <button class="btn-opcao" onclick="finalizarEscolha('uma Pizzaria')">
+          <span>🍕</span> Pizzaria
+        </button>
+      </div>
+    </div>
+
+    <!-- FASE 5: Confirmação Final -->
+    <div id="fase-final" class="etapa">
+      <div class="icone-topo">🎉🙌</div>
+      <h2>Encontro marcado!</h2>
+      <p id="resumo-escolhas"></p>
+      <a id="link-zap" class="btn-zap" href="#" onclick="registrarEnvio()">
+        💬 Confirmar no WhatsApp
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    // ==========================================
+    // ⚙️ CONFIGURAÇÕES - PERSONALIZE AQUI
+    // ==========================================
+    const CONFIG = {
+      // Nome da pessoa (opcional - deixe vazio "" se não quiser especificar)
+      NOME_PESSOA: "",
+
+      // Seu número de WhatsApp com DDI (55 para Brasil) + DDD + Número (apenas dígitos)
+      NUMERO_WHATSAPP: "5511999999999",
+
+      // Ativar ou desativar o registro no backend (salvar.php)
+      ATIVAR_LOGS_BACKEND: true
+    };
+
+    // Aplica o nome se estiver configurado
+    if (CONFIG.NOME_PESSOA.trim() !== "") {
+      document.getElementById('titulo-convite').innerText = `${CONFIG.NOME_PESSOA}, aceita sair comigo?`;
+    }
+
+    let diaEscolhido = "";
+    let turnoEscolhido = "";
+    let tentativasNao = 0;
+
+    // --- ENVIAR PARA O BACKEND (salvar.php) ---
+    function salvarNoBackend(acao, detalhes = '') {
+      if (!CONFIG.ATIVAR_LOGS_BACKEND) return;
+
+      fetch('salvar.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ acao: acao, detalhes: detalhes })
+      }).catch(err => console.log('Log local:', err));
+    }
+
+    // Registra abertura da página
+    salvarNoBackend('Página aberta', 'Alguém acessou o convite');
+
+    // 1. Lógica do botão Não esquivar
+    const btnNao = document.getElementById('btn-nao');
+    const btnSim = document.getElementById('btn-sim');
+    let escalaSim = 1;
+
+    function fugirBotao(e) {
+      if (e) e.preventDefault();
+      tentativasNao++;
+
+      if (tentativasNao === 1 || tentativasNao % 3 === 0) {
+        salvarNoBackend('Tentou clicar no Não', `${tentativasNao}ª tentativa`);
+      }
+
+      const larguraJanela = window.innerWidth - btnNao.offsetWidth - 40;
+      const alturaJanela = window.innerHeight - btnNao.offsetHeight - 40;
+
+      const randomX = Math.max(20, Math.floor(Math.random() * Math.max(larguraJanela, 50)));
+      const randomY = Math.max(20, Math.floor(Math.random() * Math.max(alturaJanela, 50)));
+
+      btnNao.style.position = 'fixed';
+      btnNao.style.left = `${randomX}px`;
+      btnNao.style.top = `${randomY}px`;
+
+      escalaSim += 0.2;
+      btnSim.style.transform = `scale(${escalaSim})`;
+    }
+
+    btnNao.addEventListener('mouseover', fugirBotao);
+    btnNao.addEventListener('touchstart', fugirBotao);
+    btnNao.addEventListener('click', fugirBotao);
+
+    // 2. Transições de telas
+    function trocarTela(idSair, idEntrar) {
+      document.getElementById(idSair).classList.remove('ativa');
+      document.getElementById(idEntrar).classList.add('ativa');
+    }
+
+    btnSim.addEventListener('click', () => {
+      btnNao.style.display = 'none';
+      salvarNoBackend('Aceitou convite', 'Clicou no Sim');
+      trocarTela('fase-1', 'fase-2');
+    });
+
+    function escolherDia(dia) {
+      diaEscolhido = dia;
+      salvarNoBackend('Escolha de Dia', dia);
+      trocarTela('fase-2', 'fase-3');
+    }
+
+    function escolherTurno(turno) {
+      turnoEscolhido = turno;
+      salvarNoBackend('Escolha de Turno', turno);
+
+      if (turno === 'Tarde') {
+        trocarTela('fase-3', 'fase-tarde');
+      } else {
+        trocarTela('fase-3', 'fase-noite');
+      }
+    }
+
+    function finalizarEscolha(lugar) {
+      salvarNoBackend('Escolha de Lugar', lugar);
+
+      const telaAtual = (turnoEscolhido === 'Tarde') ? 'fase-tarde' : 'fase-noite';
+
+      document.getElementById('resumo-escolhas').innerText = 
+        `Combinado! Vamos no ${diaEscolhido} de ${turnoEscolhido.toLowerCase()} em ${lugar}.`;
+
+      // Texto base da mensagem
+      const textoBase = `Oi! Aceitei o convite! Vamos no ${diaEscolhido} de ${turnoEscolhido.toLowerCase()} em ${lugar}! `;
+      
+      // %F0%9F%98%81 = 😁 | %E2%9C%A8 = ✨ (UTF-8 Hex para suporte universal)
+      const textoCompleto = encodeURIComponent(textoBase) + '%F0%9F%98%81%E2%9C%A8';
+
+      // Detecta mobile vs desktop
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const linkZap = document.getElementById('link-zap');
+
+      if (isMobile) {
+        linkZap.href = `whatsapp://send?phone=${CONFIG.NUMERO_WHATSAPP}&text=${textoCompleto}`;
+      } else {
+        linkZap.href = `https://api.whatsapp.com/send?phone=${CONFIG.NUMERO_WHATSAPP}&text=${textoCompleto}`;
+        linkZap.target = "_blank";
+      }
+
+      trocarTela(telaAtual, 'fase-final');
+    }
+
+    function registrarEnvio() {
+      salvarNoBackend('Clicou no botão do WhatsApp', `Turno: ${turnoEscolhido}`);
+    }
+  </script>
+</body>
+</html>
